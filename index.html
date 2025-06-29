@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Amad - Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .background-animated {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: transparent;
+        }
+        .background-animated::before, .background-animated::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 8s ease-in-out infinite alternate;
+        }
+        .background-animated::before {
+            width: 400px; height: 400px;
+            left: -100px; top: -100px;
+            background: #667eea;
+            animation-delay: 0s;
+        }
+        .background-animated::after {
+            width: 300px; height: 300px;
+            right: -80px; bottom: -80px;
+            background: #764ba2;
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(40px) scale(1.1); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .profile-card {
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px 0 rgba(102,126,234,0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2.5rem 2rem 2rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 370px;
+            animation: fadeIn 1.2s cubic-bezier(.39,.575,.565,1) both;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-photo {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid #667eea;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.6);
+            object-fit: cover;
+            animation: popIn 1s cubic-bezier(.39,.575,.565,1) 0.3s both;
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.7); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+            font-size: 2.4rem;
+            color: #00ffff;
+            margin: 0.5rem 0 0.2rem 0;
+            text-shadow: 0 0 12px #00ffff, 0 0 24px rgba(255,255,255,0.5);
+            letter-spacing: 2px;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 12px #00ffff, 0 0 24px rgba(255,255,255,0.5); }
+            100% { text-shadow: 0 0 32px #00ffff, 0 0 48px rgba(255,255,255,0.7); }
+        }
+        .bio {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .headline {
+            color: #00ffff;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+            text-shadow: 0 0 8px rgba(0,255,255,0.8);
+        }
+
+        .skills {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            margin: 1.2rem 0 1.2rem 0;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 12px rgba(102,126,234,0.2);
+            animation: fadeIn 1.2s cubic-bezier(.39,.575,.565,1) 0.7s both;
+            border: 1.5px solid rgba(255,255,255,0.2);
+        }
+        .skills h3 {
+            color: #00ffff;
+            font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+            font-size: 1.15rem;
+            margin-bottom: 0.7rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 6px rgba(0,255,255,0.8);
+        }
+        .skills ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .skills li {
+            color: #fff;
+            background: linear-gradient(90deg, rgba(102,126,234,0.2) 0%, rgba(118,75,162,0.2) 100%);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+            box-shadow: 0 1px 8px rgba(102,126,234,0.2);
+            transition: transform 0.15s, box-shadow 0.15s;
+            border-left: 3px solid #667eea;
+            letter-spacing: 1px;
+        }
+        .skills li:last-child {
+            margin-bottom: 0;
+        }
+        .skills li:hover {
+            transform: scale(1.04);
+            box-shadow: 0 4px 24px rgba(102,126,234,0.4);
+            background: linear-gradient(90deg, rgba(118,75,162,0.3) 0%, rgba(102,126,234,0.3) 100%);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(102,126,234,0.2);
+            box-shadow: 0 2px 8px rgba(102,126,234,0.2);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .icon svg {
+            transition: transform 0.3s;
+        }
+        .icon.ig:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scale(1.12) rotate(-6deg);
+            box-shadow: 0 0 16px #667eea;
+        }
+        .icon.li:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.12) rotate(6deg);
+            box-shadow: 0 0 16px #667eea;
+        }
+        .icon:hover svg {
+            transform: scale(1.2);
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px 0 rgba(102,126,234,0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            max-width: 350px;
+            width: 100%;
+            border: 1.5px solid rgba(255,255,255,0.2);
+        }
+        .contact-form h2 {
+            color: #667eea;
+            font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1rem;
+            transition: box-shadow 0.3s;
+            box-sizing: border-box;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            box-shadow: 0 4px 16px rgba(102,126,234,0.3);
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(102,126,234,0.4);
+        }
+        .form-message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            .profile-card, .contact-form {
+                max-width: 100%;
+                margin: 1rem 0;
+            }
+            .profile-photo {
+                width: 90px;
+                height: 90px;
+            }
+        }
+        .live-messages {
+            max-width: 350px;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .single-message {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            font-size: 0.9rem;
+            border-left: 3px solid #667eea;
+        }
+        .single-message strong {
+            color: #667eea;
+        }
+        .single-message em {
+            color: #a8b2ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animated"></div>
+    <div class="container">
+        <div class="profile-card">
+            <img src="amad.jpg" alt="Profile Photo" class="profile-photo">
+            <h1>AmadMurad</h1>
+            <p class="bio">Dreamer. Creator. Explorer. Sharing my journey, one post at a time.<br>
+            Passionate about technology, storytelling, and building meaningful digital experiences. Always seeking new adventures and ways to inspire others.</p>
+            <p class="headline">Developer | UI/UX Enthusiast | Lifelong Learner<br>
+            Specialized in crafting beautiful, user-centered applications for web, mobile, and desktop. Advocate for clean code, creative design, and continuous growth. Let's connect and create something amazing together!</p>
+            <div class="skills">
+                <h3>Skills & Expertise</h3>
+                <ul>
+                    <li>Java & C# Programming</li>
+                    <li>Web Development (Frontend & Backend)</li>
+                    <li>Windows, Web, and Mobile App Development</li>
+                    <li>Flutter for Cross-Platform Apps</li>
+                    <li>Robotics & Arduino Projects</li>
+                </ul>
+            </div>
+        </div>
+        <div id="liveMessages" class="live-messages"></div>
+        <p style="margin-top:24px;font-size:1.08rem;color:#fff;text-align:center;">For any questions, help, or collaboration, feel free to contact me directly by email.</p>
+        <a href="mailto:amadmurad4@gmail.com?subject=Contact%20from%20Website" class="contact-email-btn" style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:#fff;border-radius:8px;text-decoration:none;font-size:1.1rem;font-weight:500;margin-top:24px;text-align:center;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow=''">Send me an Email</a>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
+            const liveMessages = document.getElementById('liveMessages');
+
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    formMessage.textContent = '';
+                    formMessage.style.opacity = 0.7;
+
+                    // Get form values
+                    const name = form.elements['name'].value;
+                    const email = form.elements['email'].value;
+                    const message = form.elements['message'].value;
+
+                    // Create message element
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'single-message';
+                    msgDiv.innerHTML = `<strong>${name}</strong> (<em>${email}</em>):<br>${message}`;
+                    liveMessages.prepend(msgDiv);
+
+                    const formData = new FormData(form);
+                    fetch('contact.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            formMessage.textContent = 'Thank you for contacting me!';
+                            formMessage.style.color = '#fff';
+                            form.reset();
+                        } else {
+                            formMessage.textContent = data.error || 'Something went wrong. Please try again.';
+                            formMessage.style.color = '#a8b2ff';
+                        }
+                        formMessage.style.opacity = 1;
+                    })
+                    .catch(() => {
+                        formMessage.textContent = 'Could not send message. Please try again later.';
+                        formMessage.style.color = '#a8b2ff';
+                        formMessage.style.opacity = 1;
+                    });
+                });
+
+                // Animate form fields on focus
+                const inputs = form.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        input.style.boxShadow = '0 4px 16px rgba(102,126,234,0.28)';
+                    });
+                    input.addEventListener('blur', () => {
+                        input.style.boxShadow = '';
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
